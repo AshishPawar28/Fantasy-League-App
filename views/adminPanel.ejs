@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Admin Panel
+        </title>
+    </head>
+    <body>
+        <h1>
+            This is Admin Panel
+        </h1>
+        <h2><%= currentUser.username %></h2>
+        <% for(var i=0; i<(currentUser.contests.length); i++){ %>
+          
+            <li>Name: <%= currentUser.contests[i].name %>, Amount: <%= currentUser.contests[i].amount %> <a href="/adminPanel/createContest/<%= currentUser.contests[i]._id %>">Edit</a></li>
+        <% } %>
+        
+        
+        <a href="adminPanel/createContest">Create a new contest</a>
+
+        
+    </body>
+</html>

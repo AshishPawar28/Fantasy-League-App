@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Contest Edit Page
+        </title>
+
+    </head>
+    <body>
+        <% for(var i=0; i<(contest.games.length); i++){%>
+        <li>
+            <%= contest.games[i].sport %>
+            <ul>
+                
+            
+                
+                <% for(var j=0; j<(contest.games[i].teams.length); j++){ %>
+                
+                    <li>  <%= contest.games[i].teams[j].name %> 
+                        
+                        <% if(!(contest.games[i].teams[j].score)){ %>
+                            <a href="/adminPanel/fillScore/<%= String(contest.games[i].teams[j].
+                            _id) %>/<%= String(contest._id) %>">Fill Score</a>
+                        <% }else{ %>
+                            <ul>
+                                <li>Score: <%= contest.games[i].teams[j].score %></li>
+                            </ul>
+                            
+
+                        <% } %>
+                        
+                         </li>
+                
+                <% } %>
+            </ul>
+
+        </li>
+        <% } %>
+
+        <% var printCalculate = true %>
+        <% for(var i=0; i<(contest.games.length); i++){ %>
+           <% for(var j=0; j<(contest.games[i].teams.length); j++){ %>
+               <% if(contest.games[i].teams[j].score){ %>
+                   <% continue; %>
+                <% }else{ %>
+                    <% printCalculate = false %>
+                 <%   break; %>
+            <% } %>
+          <%  } %>
+        <% } %>
+
+
+                    <% if(printCalculate){ %>
+                        <a href="/adminPanel/calculate/<%= String(contest._id) %>">Calculate Points of all teams</a>
+                    <% } %>
+
+       
+
+        <h1><%= contest.name %></h1>
+        <form action="/adminPanel/createContest/<%=contest._id%>" method="POST">
+            <input type="text" name="game" placeholder="Name of the game">
+            <input type="text" name="team1" placeholder="Team1 Name">
+            <input type="text" name="team2" placeholder="Team2 Name">
+            <button>Submit</button>
+        
+        </form>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contest Description</title>
+    </head>
+    <body>
+           
+
+                    <% if(!parStatus){ %>
+                        
+                        <a href="/userPanel/participate/<%= String(contest._id) %>">Participate</a>
+
+
+                        <% for(var i=0; i<(contest.games.length); i++){ %>
+
+                            <li><%= contest.games[i].sport %></li>
+                            <ul>
+                                <% for(var j=0; j<(contest.games[i].teams.length); j++){ %>
+        
+                                        <li><%= contest.games[i].teams[j].name %></li>
+        
+                                <% } %>
+                            </ul>
+        
+                        <% } %>
+                        
+                    <% }else{ %>
+
+
+                        <% for(var i=0; i<(contest.games.length); i++){ %>
+                            <% printAdd = true; %>
+                            <% for(var k=0; k<(gameIdArray.length); k++){ %>
+
+                                <% if(String(gameIdArray[k].gameId)==String(contest.games[i]._id)){ %>
+                                    <% console.log("In the if statement") %>
+                                       <% printAdd = false; %>
+
+                                <% } %>
+
+                         <% } %>
+
+                         
+
+                            <li><%= contest.games[i].sport %></li>
+                            <ul>
+                                <% for(var j=0; j<(contest.games[i].teams.length); j++){ %>
+
+
+                                
+                            
+                                        
+
+                                        <li><%= contest.games[i].teams[j].name %>
+                                        <% if(printAdd){ %>    
+                                            <a href="/userPanel/addTeam/<%= String(contest.games[i].teams[j]._id)%>/<%= String(contest.games[i]._id) %>/<%= String(contest._id) %> %>">add</a>
+                                        <% }else{ %>
+                                            <a>Remove</a>    
+                                        <% } %>
+                                        </li>
+        
+                                <% } %>
+                            </ul>
+        
+                        <% } %>
+
+
+                    <% } %>
+            
+    </body>
+
+</html>

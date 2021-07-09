@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Show Contests</title>
+    </head>
+    <body>
+        <% for(var i=0; i<(admin.contests.length); i++){ %>
+        
+               <li>Name: <%= admin.contests[i].name %> Amount: <%= admin.contests[i].amount %>  <a href="/userPanel/<%= admin.contests[i]._id %>">See Description</a> </li> 
+        
+        <% } %>
+    </body>
+</html>
